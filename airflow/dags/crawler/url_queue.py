@@ -1,14 +1,15 @@
-import redis
+from queue import Queue
 
 class URLQueue:
     def __init__(self):
-        self.redis = redis.Redis(host='localhost', port=6379, db=0)
+        self.queue = Queue()
 
     def enqueue(self, url):
-        self.redis.lpush('url_queue', url)
+        self.queue.put(url)
 
     def dequeue(self):
-        return self.redis.rpop('url_queue')
+        return self.queue.get()
 
     def is_empty(self):
-        return self.redis.llen('url_queue') == 0
+        return self.queue.empty()
+

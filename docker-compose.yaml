@@ -1,18 +1,23 @@
 version: '3'
 x-airflow-common:
   &airflow-common
-  image: apache/airflow:2.4.1-python3.9
+  #image: apache/airflow:2.4.0
+  build: .
   environment:
+    - AIRFLOW__WEBSERVER__SECRET_KEY=sRYVrvnP23TPXHXCzZJuvg==
+    - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
     - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-    - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:postgres@postgres:5432/airflow
+    - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:postgres@postgres:5432/airflow
     - AIRFLOW__CORE__FERNET_KEY=FB0o_zt4e3Ziq3LdUUO7F2Z95cvFFx16hU8jTeR1ASM=
     - AIRFLOW__CORE__LOAD_EXAMPLES=False
-    - AIRFLOW__CORE__LOGGING_LEVEL=INFO
+    - AIRFLOW__LOGGING__LOGGING_LEVEL=INFO
   volumes:
     - ./airflow/dags:/opt/airflow/dags
     - ./airflow/logs:/opt/airflow/logs
     - ./airflow/plugins:/opt/airflow/plugins
-    - ./airflow/airflow.cfg:/opt/airlfow/airflow.cfg
+    - ./content:/content
+    - ./images:/images
+    - ./stored_data:/stored_data
   depends_on:
     - postgres
 
@@ -23,7 +28,7 @@ services:
     ports:
       - "4444:4444"
     environment:
-      - GRID_MAX_SESSION=10  # Adjust this based on your need
+      - GRID_MAX_SESSION=20  # Adjust this based on your need
 
   selenium-node-chrome1:
     image: selenium/node-chrome:4.6.0
@@ -33,7 +38,7 @@ services:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-      - SE_NODE_MAX_SESSIONS=10  # Set the maximum number of sessions per node
+      - SE_NODE_MAX_SESSIONS=5  # Set the maximum number of sessions per node
       - SE_NODE_PORT=5555
     depends_on:
       - selenium-hub
@@ -56,7 +61,7 @@ services:
     entrypoint: /bin/bash
     command:
       - -c
-      - airflow users list || ( airflow db init &&
+      - airflow users list && ( airflow db init &&
         airflow users create
           --role Admin
           --username airflow
@@ -76,7 +81,12 @@ services:
 
   airflow-scheduler:
     << : *airflow-common
+    depends_on:
+      - airflow-webserver
     command: airflow scheduler
     container_name: airflow_scheduler
     restart: always
+
+  
+    
 
