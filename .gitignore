@@ -6,7 +6,7 @@
 /stored_data/
 
 # Bỏ qua các tệp log
-*.log
+/logs/
 
 # Bỏ qua các tệp cấu hình IDE
 .vscode/
@@ -18,7 +18,8 @@ Thumbs.db
 
 # Bỏ qua các tệp biên dịch Python
 *.pyc
-__pycache__/
+dags/__pycache__/
+crawler/__pycache__/
 
 # Bỏ qua các tệp môi trường ảo Python
 venv/
