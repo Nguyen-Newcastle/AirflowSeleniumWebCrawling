@@ -1,0 +1,25 @@
+# Bỏ qua thư mục nội dung
+/content/
+# Bỏ qua thư mục hình ảnh
+/images/
+# Bỏ qua thư mục lưu trữ dữ liệu
+/stored_data/
+
+# Bỏ qua các tệp log
+*.log
+
+# Bỏ qua các tệp cấu hình IDE
+.vscode/
+.idea/
+
+# Bỏ qua các tệp tạm thời của hệ thống
+.DS_Store
+Thumbs.db
+
+# Bỏ qua các tệp biên dịch Python
+*.pyc
+__pycache__/
+
+# Bỏ qua các tệp môi trường ảo Python
+venv/
+.env/
