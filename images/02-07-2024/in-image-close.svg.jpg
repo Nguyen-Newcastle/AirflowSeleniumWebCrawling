@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <ellipse id="b" cx="9.987" cy="9.977" rx="9.987" ry="9.977"/>
+    <filter id="a" y="-5%" filterUnits="objectBoundingBox">
+      <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur stdDeviation=".5" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+      <feColorMatrix values="0 0 0 0 0.62745098 0 0 0 0 0.670588235 0 0 0 0 0.68627451 0 0 0 1 0" in="shadowBlurOuter1"/>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(1)">
+    <use fill="black" filter="url(#a)" xlink:href="#b"/>
+    <use fill="#FFFFFF" xlink:href="#b"/>
+    <polygon fill="#9BA6AB" points="10.512 9.452 10.512 4.201 9.461 4.201 9.461 9.452 4.205 9.452 4.205 10.502 9.461 10.502 9.461 15.753 10.512 15.753 10.512 10.502 15.769 10.502 15.769 9.452" transform="rotate(45 9.987 9.977)"/>
+  </g>
+</svg>

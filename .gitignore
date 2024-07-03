@@ -1,12 +1,13 @@
 # Bỏ qua thư mục nội dung
-/content/
+#/content/
 # Bỏ qua thư mục hình ảnh
-/images/
+#images/
 # Bỏ qua thư mục lưu trữ dữ liệu
-/stored_data/
+#stored_data/
 
 # Bỏ qua các tệp log
-/logs/
+/airflow/logs/
+/airflow/plugins/
 
 # Bỏ qua các tệp cấu hình IDE
 .vscode/
@@ -18,8 +19,8 @@ Thumbs.db
 
 # Bỏ qua các tệp biên dịch Python
 *.pyc
-dags/__pycache__/
-crawler/__pycache__/
+airflow/dags/__pycache__/
+airflow/crawler/__pycache__/
 
 # Bỏ qua các tệp môi trường ảo Python
 venv/
