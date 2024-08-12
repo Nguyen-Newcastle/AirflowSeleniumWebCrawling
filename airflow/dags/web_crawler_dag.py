@@ -21,7 +21,7 @@ dag = DAG(
 )
 
 def run_crawler(**kwargs):
-    base_url = kwargs['dag_run'].conf.get('base_url', 'https://www.24h.com.vn/')
+    base_url = kwargs['dag_run'].conf.get('base_url', 'https://www.shb.com.vn/')
     crawler = WebCrawler(base_url)
     crawler.crawl()
     crawler.close()

@@ -167,7 +167,11 @@ class WebCrawler:
             f.write(f"{url},{datetime.now().strftime('%Y-%m-%d')}\n")
     
     def _get_file_name_from_url(self, url):
-        return url.split('/')[-1].split('?')[0]
+        if url.endswith("/"):
+            new_url = url[:-1]
+        else:
+            new_url = url
+        return new_url.split('/')[-1].split('?')[0]
 
     def close(self):
         self.driver.quit()
